@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="思路：将不是停靠站的点连向此趟车的虚点，再将此趟车的虚点连向停靠站，最后再拓扑排序一下求出每个点最少是多少，最后再求出每个点最少是多少中的最大值就行了。  通过读题可以发现，我们要求的是最少划分的级别数，也就可以是要求每个车站最小的级别是多少，我们通过停靠站，知道从起点到终点中，停靠站的级别肯定大于不是停靠站的级别，那么我们就将其以一条有向边连起来，为了方便起见，我们由不是停靠站的连向是停靠站，但">
+  <meta name="description" content="P1983 [NOIP2013 普及组] 车站分级思路：将不是停靠站的点连向此趟车的虚点，再将此趟车的虚点连向停靠站，最后再拓扑排序一下求出每个点最少是多少，最后再求出每个点最少是多少中的最大值就行了。  通过读题可以发现，我们要求的是最少划分的级别数，也就可以是要求每个车站最小的级别是多少，我们通过停靠站，知道从起点到终点中，停靠站的级别肯定大于不是停靠站的级别，那么我们就将其以一条有向边连起来">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://example.com/2024/03/26/P1983%20[NOIP2013%20%E6%99%AE%E5%8F%8A%E7%BB%84]%20%E8%BD%A6%E7%AB%99%E5%88%86%E7%BA%A7/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="思路：将不是停靠站的点连向此趟车的虚点，再将此趟车的虚点连向停靠站，最后再拓扑排序一下求出每个点最少是多少，最后再求出每个点最少是多少中的最大值就行了。  通过读题可以发现，我们要求的是最少划分的级别数，也就可以是要求每个车站最小的级别是多少，我们通过停靠站，知道从起点到终点中，停靠站的级别肯定大于不是停靠站的级别，那么我们就将其以一条有向边连起来，为了方便起见，我们由不是停靠站的连向是停靠站，但">
+<meta property="og:description" content="P1983 [NOIP2013 普及组] 车站分级思路：将不是停靠站的点连向此趟车的虚点，再将此趟车的虚点连向停靠站，最后再拓扑排序一下求出每个点最少是多少，最后再求出每个点最少是多少中的最大值就行了。  通过读题可以发现，我们要求的是最少划分的级别数，也就可以是要求每个车站最小的级别是多少，我们通过停靠站，知道从起点到终点中，停靠站的级别肯定大于不是停靠站的级别，那么我们就将其以一条有向边连起来">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-03-26T04:08:51.438Z">
-<meta property="article:modified_time" content="2024-03-26T04:09:04.575Z">
+<meta property="article:modified_time" content="2024-03-26T04:15:15.509Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -159,7 +159,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>思路：将不是停靠站的点连向此趟车的虚点，再将此趟车的虚点连向停靠站，最后再拓扑排序一下求出每个点最少是多少，最后再求出每个点最少是多少中的最大值就行了。</p>
+        <h2 id="P1983-NOIP2013-普及组-车站分级"><a href="#P1983-NOIP2013-普及组-车站分级" class="headerlink" title="P1983 [NOIP2013 普及组] 车站分级"></a>P1983 [NOIP2013 普及组] 车站分级</h2><p>思路：将不是停靠站的点连向此趟车的虚点，再将此趟车的虚点连向停靠站，最后再拓扑排序一下求出每个点最少是多少，最后再求出每个点最少是多少中的最大值就行了。</p>
 <hr>
 <p>通过读题可以发现，我们要求的是<strong>最少划分的级别数</strong>，也就可以是要求每个车站最小的级别是多少，我们通过停靠站，知道从起点到终点中，停靠站的级别肯定大于不是停靠站的级别，那么我们就将其以一条有向边连起来，为了方便起见，我们由不是停靠站的连向是停靠站，但我们可以发现空间不够，我们就可以用<strong>优化建图（也叫图论建模）</strong>，也就是将不是停靠站的连向自己那趟车的<strong>虚点</strong>再将虚点连向是停靠站的位置。</p>
 <p>接下来我们得考虑边权了：</p>
