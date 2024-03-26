@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>114514 | Hexo</title>
+  <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="第一章内容  第二章内容  参考文献">
+  <meta name="description" content="思路：将不是停靠站的点连向此趟车的虚点，再将此趟车的虚点连向停靠站，最后再拓扑排序一下求出每个点最少是多少，最后再求出每个点最少是多少中的最大值就行了。  通过读题可以发现，我们要求的是最少划分的级别数，也就可以是要求每个车站最小的级别是多少，我们通过停靠站，知道从起点到终点中，停靠站的级别肯定大于不是停靠站的级别，那么我们就将其以一条有向边连起来，为了方便起见，我们由不是停靠站的连向是停靠站，但">
 <meta property="og:type" content="article">
-<meta property="og:title" content="114514">
-<meta property="og:url" content="http://example.com/2024/03/25/114514/index.html">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2024/03/26/P1983%20[NOIP2013%20%E6%99%AE%E5%8F%8A%E7%BB%84]%20%E8%BD%A6%E7%AB%99%E5%88%86%E7%BA%A7/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="第一章内容  第二章内容  参考文献">
+<meta property="og:description" content="思路：将不是停靠站的点连向此趟车的虚点，再将此趟车的虚点连向停靠站，最后再拓扑排序一下求出每个点最少是多少，最后再求出每个点最少是多少中的最大值就行了。  通过读题可以发现，我们要求的是最少划分的级别数，也就可以是要求每个车站最小的级别是多少，我们通过停靠站，知道从起点到终点中，停靠站的级别肯定大于不是停靠站的级别，那么我们就将其以一条有向边连起来，为了方便起见，我们由不是停靠站的连向是停靠站，但">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-03-25T12:41:04.000Z">
-<meta property="article:modified_time" content="2024-03-25T12:43:37.040Z">
+<meta property="article:published_time" content="2024-03-26T04:08:51.438Z">
+<meta property="article:modified_time" content="2024-03-26T04:09:04.575Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -154,31 +154,24 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-114514" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-P1983 [NOIP2013 普及组] 车站分级" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      114514
-    </h1>
-  
-
-        
-        <a href="/2024/03/25/114514/" class="archive-article-date">
-  	<time datetime="2024-03-25T12:41:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-25</time>
-</a>
-        
-      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h3><p>内容</p>
+        <p>思路：将不是停靠站的点连向此趟车的虚点，再将此趟车的虚点连向停靠站，最后再拓扑排序一下求出每个点最少是多少，最后再求出每个点最少是多少中的最大值就行了。</p>
 <hr>
-<h3 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h3><p>内容</p>
-<hr>
-<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3>
+<p>通过读题可以发现，我们要求的是<strong>最少划分的级别数</strong>，也就可以是要求每个车站最小的级别是多少，我们通过停靠站，知道从起点到终点中，停靠站的级别肯定大于不是停靠站的级别，那么我们就将其以一条有向边连起来，为了方便起见，我们由不是停靠站的连向是停靠站，但我们可以发现空间不够，我们就可以用<strong>优化建图（也叫图论建模）</strong>，也就是将不是停靠站的连向自己那趟车的<strong>虚点</strong>再将虚点连向是停靠站的位置。</p>
+<p>接下来我们得考虑边权了：</p>
+<ol>
+<li><p>若点 $u$ 不是虚点，那么点 $u$ 连向的点肯定是虚点，那么边权就为 $0$。</p>
+</li>
+<li><p>若点 $u$ 是虚点，那么点 $u$ 连向的点肯定是不是虚点，那么边权就为 $1$。</p>
+</li>
+</ol>
+<p>考虑完建图后，接下来就是拓扑排序，当然拓扑排序和一般的一样，但要注意细节，<strong>注意：拓扑排序时的起点也是包括虚点的</strong>。</p>
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> fast ios::sync_with_stdio(false);cin.tie(0),cout.tie(0);</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> endl <span class="string">&#x27;\n&#x27;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> pb push_back</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> rep(l,r,i) for(int i=l,END##i=r;i&lt;=END##i;i++)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> per(r,l,i) for(int i=r,END##i=l;i&gt;=END##i;i--)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN=<span class="number">1010</span>,MAXM=<span class="number">2010</span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">qread</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> s=<span class="number">0</span>;<span class="type">char</span> ch=<span class="built_in">getchar</span>();<span class="type">bool</span> fu=<span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">while</span>(ch&lt;<span class="string">&#x27;0&#x27;</span>||ch&gt;<span class="string">&#x27;9&#x27;</span>)ch==<span class="string">&#x27;-&#x27;</span>?fu=<span class="literal">true</span>:<span class="number">0</span>,ch=<span class="built_in">getchar</span>();</span><br><span class="line">    <span class="keyword">while</span>(ch&gt;=<span class="string">&#x27;0&#x27;</span>&amp;&amp;ch&lt;=<span class="string">&#x27;9&#x27;</span>)s=(s&lt;&lt;<span class="number">1</span>)+(s&lt;&lt;<span class="number">3</span>)+(ch^<span class="number">48</span>),ch=<span class="built_in">getchar</span>();</span><br><span class="line">    <span class="keyword">return</span> fu?-s:s;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> n,m,d[MAXM],dist[MAXM];</span><br><span class="line">vector&lt;pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt;&gt; G[MAXM];</span><br><span class="line"><span class="type">bool</span> st[MAXN];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    n=<span class="built_in">qread</span>(),m=<span class="built_in">qread</span>();</span><br><span class="line">    <span class="built_in">rep</span>(<span class="number">1</span>,m,i)&#123;</span><br><span class="line">        <span class="built_in">memset</span>(st,<span class="literal">false</span>,<span class="built_in">sizeof</span>(st));</span><br><span class="line">        <span class="type">int</span> s=<span class="built_in">qread</span>(),start=n,end=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(s--)&#123;</span><br><span class="line">            <span class="type">int</span> a=<span class="built_in">qread</span>();</span><br><span class="line">            start=<span class="built_in">min</span>(a,start);</span><br><span class="line">            end=<span class="built_in">max</span>(a,end);</span><br><span class="line">            st[a]=<span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">rep</span>(start,end,j)</span><br><span class="line">            <span class="keyword">if</span>(st[j])&#123;</span><br><span class="line">                G[i+n].<span class="built_in">pb</span>(&#123;j,<span class="number">1</span>&#125;);</span><br><span class="line">                d[j]++;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                G[j].<span class="built_in">pb</span>(&#123;i+n,<span class="number">0</span>&#125;);</span><br><span class="line">                d[i+n]++;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">rep</span>(<span class="number">1</span>,n,i)dist[i]=<span class="number">1</span>;</span><br><span class="line">    queue&lt;<span class="type">int</span>&gt;q;</span><br><span class="line">    <span class="built_in">rep</span>(<span class="number">1</span>,n+m,i)<span class="keyword">if</span>(!d[i])&#123;</span><br><span class="line">        q.<span class="built_in">push</span>(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(!q.<span class="built_in">empty</span>())&#123;</span><br><span class="line">        <span class="type">int</span> u=q.<span class="built_in">front</span>();q.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;G[u].<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">            <span class="type">int</span> ver=G[u][i].first,w=G[u][i].second;</span><br><span class="line">            dist[ver]=<span class="built_in">max</span>(dist[ver],dist[u]+w);</span><br><span class="line">            <span class="keyword">if</span>(!--d[ver])q.<span class="built_in">push</span>(ver);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">rep</span>(<span class="number">1</span>,n,i)ans=<span class="built_in">max</span>(ans,dist[i]);</span><br><span class="line">    cout&lt;&lt;ans&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -257,7 +250,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2024/03/25/114514/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2024/03/26/P1983%20[NOIP2013%20%E6%99%AE%E5%8F%8A%E7%BB%84]%20%E8%BD%A6%E7%AB%99%E5%88%86%E7%BA%A7/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -272,8 +265,8 @@
 <nav id="article-nav">
   
   
-    <a href="/2024/03/25/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
+    <a href="/2024/03/26/P2672%20%5BNOIP2015%20%E6%99%AE%E5%8F%8A%E7%BB%84%5D%20%E6%8E%A8%E9%94%80%E5%91%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
       <i class="icon-circle-right"></i>
     </a>
   
